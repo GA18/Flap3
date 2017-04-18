@@ -12,13 +12,28 @@ public class MoveMorcego : MonoBehaviour
     public float max;
     public float espera;
 
+    private GameObject player;
+    private bool pontuou;
+
     // Use this for initialization
     void Start()
     {
-        StartCoroutine(Move(max));
+        StartCoroutine(Move(min));
+        player = GameObject.Find("bALÃO 4");
+        pontuou = false;
     }
 
-   IEnumerator Move(float destino)
+    void Update()
+    {
+
+        Vector3 velocidadeVetorial = Vector3.left * velocidade;
+
+        transform.position = transform.position + velocidadeVetorial * Time.deltaTime;
+       
+
+    }
+
+    IEnumerator Move(float destino)
     {
         while(Mathf.Abs(destino - transform.position.y) > 0.3f) {
    
@@ -38,13 +53,5 @@ public class MoveMorcego : MonoBehaviour
         StartCoroutine(Move(destino));
     }
 
-    void Update()
-    {
-
-        Vector3 velocidadeVetorial = Vector3.left * velocidade;
-
-        transform.position = transform.position + velocidadeVetorial * Time.deltaTime;
-
-
-    }
+    
     }
