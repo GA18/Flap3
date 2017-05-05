@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour {
     {
         while (GameController.instancia.estado == Estado.Jogando)
         {
-            Vector3 pos = new Vector3(0f, Random.Range(-2.0f, 5.0f), 0f);
+            Vector3 pos = new Vector3(23.19f, Random.Range(-1f, 3f), 5.48f);
             GameObject obj = Instantiate(obstaculo, pos, Quaternion.identity) as GameObject;
             Destroy(obj, tempoDestruicao);
             yield return new WaitForSeconds(espera);

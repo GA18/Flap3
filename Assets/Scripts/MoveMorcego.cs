@@ -18,7 +18,8 @@ public class MoveMorcego : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        StartCoroutine(Move(min));
+        float direcao = (Random.Range(0f, 1f) < 0.5) ? min : max;
+        StartCoroutine(Move(direcao));
         player = GameObject.Find("bALÃO 4");
         pontuou = false;
     }
