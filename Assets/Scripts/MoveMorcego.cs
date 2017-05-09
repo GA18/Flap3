@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MoveMorcego : MonoBehaviour
 {
 
@@ -13,7 +14,8 @@ public class MoveMorcego : MonoBehaviour
     public float espera;
 
     private GameObject player;
-    private bool pontuou;
+    private bool pontuou = false;
+    
 
     // Use this for initialization
     void Start()
@@ -24,15 +26,26 @@ public class MoveMorcego : MonoBehaviour
         pontuou = false;
     }
 
+    private void Awake()
+    {
+        player = GameObject.Find("bALÃO 4");
+    }
+
+
     void Update()
     {
-
-        Vector3 velocidadeVetorial = Vector3.left * velocidade;
-
+        Vector3 velocidadeVetorial = Vector3.left * velocidadeHorizontal;
         transform.position = transform.position + velocidadeVetorial * Time.deltaTime;
-       
-
+        if (!pontuou && GameController.instancia.estado == Estado.Jogando)
+        {
+            if (transform.position.x < player.transform.position.x)
+            {
+                GameController.instancia.incrementarPontos(1);
+                pontuou = true;
+            }
+        }
     }
+
 
     IEnumerator Move(float destino)
     {
@@ -53,6 +66,4 @@ public class MoveMorcego : MonoBehaviour
         destino = (destino == max) ? min : max;
         StartCoroutine(Move(destino));
     }
-
-    
-    }
+}
